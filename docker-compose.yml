@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 # This example file from a previous lecture where we ran drupal in docker compose
 # in this Assignment, change it to work with the default drupal image, and change
 # postgres to use a Swarm secret. More info in the README.md file.
@@ -21,8 +21,8 @@ services:
       - psql_user
       - psql_pass
     environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/psql_pass
-      POSTGRES_USER_FILE: /run/secrets/psql_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/psql_pass
+      - POSTGRES_USER_FILE=/run/secrets/psql_user
     volumes:
       - drupal-data:/var/lib/postgresql/data
 
@@ -35,6 +35,6 @@ volumes:
 
 secrets:
   psql_user:
-    file: ./psql_user.txt
+    external: true
   psql_pass:
     external: true
