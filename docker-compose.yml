@@ -18,7 +18,7 @@ services:
   postgres:
     image: postgres:14.3
     environment:
-      - POSTGRES_PASSWORD=mypasswd
+    - POSTGRES_PASSWORD_FILE=/run/secrets/psql_pass
     volumes:
       - drupal-data:/var/lib/postgresql/data
 
